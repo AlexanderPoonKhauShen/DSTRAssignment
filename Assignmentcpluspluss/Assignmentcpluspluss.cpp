@@ -117,6 +117,21 @@ void CallPatients()
 //FUNCTION OF <SEARCH PATIENTS>
 void SearchPatient()
 {
+	int searchOption;
+	cout << " Which Method Do You Want to Use to Search Patient?\n";
+	cout << "1. Search via PatientID\n";
+	cout << "2. Search via First Name\n" << endl;
+	cin >> searchOption;
+	if (searchOption == 1)
+	{
+		cout << "PatientID Method Selected.\nPlease Enter PatientID: ";
+		//insert PatientID
+	}
+	else if (searchOption == 2)
+	{
+		cout << "Patient First Name Method Selected.\nPlease Enter Patient First Name: ";
+		//insert First Name
+	}
 
 }
 
@@ -143,6 +158,30 @@ void getsize()
 
 	//display answer using cout
 	cout << "The size of the list now is: " << size << endl;
+}
+
+//FUNCTION OF <DOCTOR VIEW ORIGINAL WAITING LIST>
+void DoctorViewWaitingList()
+{
+
+}
+
+//FUNCTION OF <DOCTOR SEARCH AND MODIFY PATIENT RECORD>
+void DoctorSearchAndModify()
+{
+
+}
+
+//FUNCTION OF <DOCTOR SORT AND DISPLAY PATIENT VISIT HISTORY>
+void DoctorSortAndDisplay()
+{
+
+}
+
+//FUNCTION OF <DOCTOR SEARCH PATIENT VISIT HISTORY>
+void DoctorSearchPatient()
+{
+
 }
 
 int main()
