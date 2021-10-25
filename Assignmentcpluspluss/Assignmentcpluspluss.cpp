@@ -186,71 +186,89 @@ void DoctorSearchPatient()
 
 int main()
 {
-	string Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC;
-	//Optional Elements
-	string Doctor_Name, Sickness_Description;
-	header = current = NULL;
-
-	// A boolean
-	int decision = 1;
-
-	//Login Program
-	string NurseUsername, NursePassword;
-	static int chances = 5;
-	while (chances > 0)
+	int option = 0;
+	cout << "=========================Welcome To Klinik Sulaiman Patient Queue Management System=========================";
+	cout << "1. Nurse Login\n";
+	cout << "2. Doctor Login\n";
+	cout << "3. Terminate System\n";
+	cout << "Please Enter Your Option: " << endl;
+	cin >> option;
+	if (option == 1)
 	{
-		cout << "Please Enter Nurse Username: " << endl;
-		getline(cin, NurseUsername);
-		cout << "Please Enter Nurse Password: " << endl;
-		getline(cin, NursePassword);
-		chances = chances - 1;
+		string Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC;
+		//Optional Elements
+		string Doctor_Name, Sickness_Description;
+		header = current = NULL;
 
-		while (NurseUsername != "UC2F2102SE" && NursePassword != "140084DSTR")
+		// A boolean
+		int decision = 1;
+
+		//Login Program
+		string NurseUsername, NursePassword;
+		static int chances = 5;
+		while (chances > 0)
 		{
-			cout << "Wrong Username and Password!" << "\n" << endl;
-			chances--;
+			cout << "Please Enter Nurse Username: " << endl;
+			getline(cin, NurseUsername);
+			cout << "Please Enter Nurse Password: " << endl;
+			getline(cin, NursePassword);
+			chances = chances - 1;
 
+			while (NurseUsername != "UC2F2102SE" && NursePassword != "140084DSTR")
+			{
+				cout << "Wrong Username and Password!" << "\n" << endl;
+				chances--;
+
+			}
+			if (chances < 0)
+			{
+				cout << "Too Much Attempt! Auto Terminate Program Mode Activate.";
+				break;
+			}
 		}
-		if (chances < 0)
+		//Read Waiting_List Information from User
+		while (decision != 0)
 		{
-			cout << "Too Much Attempt! Auto Terminate Program Mode Activate.";
-			break;
+			cout << "Enter Patient-ID: ";
+			getline(cin, Patient_ID);
+			cout << "Enter Patient First Name: ";
+			getline(cin, First_Name);
+			cout << "Enter Patient Last Name: ";
+			getline(cin, Last_Name);
+			cout << "Enter Patient Gender: ";
+			getline(cin, Gender);
+			cout << "Enter Patient Disability: ";
+			getline(cin, Disability_Option);
+			cout << "Enter Patient Age: ";
+			getline(cin, age);
+			cout << "Enter Phone Number: ";
+			getline(cin, phone);
+			cout << "Enter Patient-IC: ";
+			getline(cin, Patient_IC);
+			cout << "Enter Doctor Name ";
+			getline(cin, Doctor_Name);
+			cout << "Enter Sickness Description: ";
+			getline(cin, Sickness_Description);
+
+			Add_Patient(Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC, Doctor_Name, Sickness_Description);
+			cout << endl;
+			cout << "To add new Patient press 1, No for 0. \n";
+			cin >> decision;
+			Sleep(5000); // wait 5 seconds
+			cout << endl;
+			cin.ignore();
 		}
 	}
-
-	//Read Waiting_List Information from User
-	while (decision != 0)
+	else if (option == 2)
 	{
-		cout << "Enter Patient-ID: ";
-		getline(cin, Patient_ID);
-		cout << "Enter Patient First Name: ";
-		getline(cin, First_Name);
-		cout << "Enter Patient Last Name: ";
-		getline(cin, Last_Name);
-		cout << "Enter Patient Gender: ";
-		getline(cin, Gender);
-		cout << "Enter Patient Disability: ";
-		getline(cin, Disability_Option);
-		cout << "Enter Patient Age: ";
-		getline(cin, age);
-		cout << "Enter Phone Number: ";
-		getline(cin, phone);
-		cout << "Enter Patient-IC: ";
-		getline(cin, Patient_IC);
-		cout << "Enter Doctor Name ";
-		getline(cin, Doctor_Name);
-		cout << "Enter Sickness Description: ";
-		getline(cin, Sickness_Description);
 
-		Add_Patient(Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC, Doctor_Name, Sickness_Description);
-		cout << endl;
-		cout << "To add new Patient press 1, No for 0. \n";
-		cin >> decision;
-		Sleep(5000); // wait 5 seconds
-		cout << endl;
-		cin.ignore();
 	}
-
+	else if (option == 3)
+	{
+		cout << "=========================Terminate System, Goodbye=========================";
+		exit;
+	}
+	
 	DisplayWaitingList();
 	return 0;
 }
