@@ -160,6 +160,8 @@ void getsize()
 	cout << "The size of the list now is: " << size << endl;
 }
 
+//ALL FUNCTIONS ABOUT DOCTOR STARTS HERE
+
 //FUNCTION OF <DOCTOR VIEW ORIGINAL WAITING LIST>
 void DoctorViewWaitingList()
 {
@@ -187,13 +189,58 @@ void DoctorSearchPatient()
 //FUNCTION OF <NURSE INTERFACE>
 void NurseInterface()
 {
-
+	int option = 0;
+	cout << "=========================Nurse Main Interface=========================";
+	cout << "1. Add New Patient On The Waiting List.\n";
+	cout << "2. Change The Patient Order According To The Priority On Waiting List.\n";
+	cout << "3. View All Patients On The Original Waiting List.\n";
+	cout << "4. Calling Patient To Be Treated.\n";
+	cout << "5. Search Patient From Waiting List Based On PatientID Or First Name.\n";
+	cout << "6. Sort Waiting List By Patient's Current Visit Time.\n";
+	cout << "7. Logout System.\n";
+	cout << "Please Enter Your Option: " << endl;
+	cin >> option;
 }
 
 //FUNCTION OF <DOCTOR INTERFACE>
 void DoctorInterface()
 {
-
+	int options = 0;
+	cout << "=========================Doctor Main Interface=========================";
+	cout << "1. View All Patients On The Original Waiting List.\n";
+	cout << "2. Search Specific Patient From The Patient's Visit History & Modify Patient Record.\n";
+	cout << "3. Sort & Display Records From Patient's Visit History.\n";
+	cout << "4. Search Patients From Patient's Visit History List Based On Sickness Description.\n";
+	cout << "5. Logout System.\n";
+	cout << "Please Enter Your Option: " << endl;
+	cin >> options;
+	switch (options) {
+	case 1:
+		cout << "**********************Entering Original Waiting List For View**********************";
+		DoctorViewWaitingList();
+		break;
+	case 2:
+		cout << "**********************Entering Patient Visit History For Searching & Modification**********************";
+		DoctorSearchAndModify();
+		break;
+	case 3:
+		cout << "**********************Entering Patient Visit History For Sorting & Displaying**********************";
+		DoctorSortAndDisplay();
+		break;
+	case 4:
+		cout << "**********************Entering Patient Visit History - Sickness Description For Searching**********************";
+		DoctorSearchPatient();
+		break;
+	case 5:
+		cout << "=========================Terminate System, Returning Main Interface=========================";
+		main();
+		break;
+	}
+	while (options != 1 && options != 2 && options != 3 && options != 4 && options != 5)
+	{
+		cout << "Wrong Input! Please Enter Again!" << endl;
+		return DoctorInterface();
+	}
 }
 
 int main()
