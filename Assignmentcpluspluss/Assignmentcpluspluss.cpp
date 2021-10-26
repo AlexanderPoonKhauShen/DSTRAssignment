@@ -6,6 +6,7 @@
 #include <windows.h>
 using namespace std;
 
+//creating List for <WAITING_LIST>
 struct waiting_list
 {
 	// Patient Elements
@@ -15,6 +16,7 @@ struct waiting_list
 	waiting_list* nextAddress;
 }*header, * newnode, * current;
 
+//creating List for <PATIENT_VISIT_HISTORY_LIST>
 struct history_list
 {
 	// Patient Elements
@@ -27,6 +29,8 @@ struct history_list
 
 //global variable for the sequence
 int size = 0;
+
+//ALL FUNCTIONS ABOUT NURSE STARTS HERE
 
 // FUNCTION OF <ADD NEW PATIENT INTO WAITING LIST>
 void Add_Patient(string Patient_ID, string First_Name, string Last_Name, string Gender, string Disability_Option,
@@ -62,6 +66,13 @@ void Add_Patient(string Patient_ID, string First_Name, string Last_Name, string 
 		header = newnode;
 	}
 	::size++;
+
+	
+
+//FUNCTION OF <CHANGE PATIENT ORDER>
+void ChangePatientOrder()
+{
+
 }
 
 //FUNCTION OF <DISPLAY PATIENT LIST>
@@ -88,11 +99,6 @@ void DisplayWaitingList()
 	}
 }
 
-//FUNCTION OF <CHANGE PATIENT ORDER>
-void ChangePatientOrder()
-{
-
-}
 
 //FUNCTION OF <CALLING PATIENTS>
 void CallPatients()
@@ -200,7 +206,43 @@ void NurseInterface()
 	cout << "7. Logout System.\n";
 	cout << "Please Enter Your Option: " << endl;
 	cin >> option;
+	switch (option) {
+	case 1:
+		cout << "**********************Adding New Patient Into Waiting List**********************";
+		Add_Patient();
+		break;
+	case 2:
+		cout << "**********************Entering Waiting List To Change Order**********************";
+		ChangePatientOrder();
+		break;
+	case 3:
+		cout << "**********************Entering Waiting List To View All Patients**********************";
+		DisplayWaitingList();
+		break;
+	case 4:
+		cout << "**********************Calling Patients To Be Treated**********************";
+		CallPatients();
+		break;
+	case 5:
+		cout << "**********************Entering Waiting List For Searching**********************";
+		SearchPatient();
+		break;
+	case 6:
+		cout << "**********************Entering Waiting List For Sorting**********************";
+		SortWaitingList();
+		break;
+	case 7:
+		cout << "=========================Terminate System, Returning Main Interface=========================";
+		main();
+		break;
+	}
+	while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option !=7)
+	{
+		cout << "Wrong Input! Please Enter Again!" << endl;
+		return DoctorInterface();
+	}
 }
+
 
 //FUNCTION OF <DOCTOR INTERFACE>
 void DoctorInterface()
@@ -317,6 +359,8 @@ int main()
 			Sleep(5000); // wait 5 seconds
 			cout << endl;
 			cin.ignore();
+		}
+		
 		}
 	}
 	else if (option == 2)
