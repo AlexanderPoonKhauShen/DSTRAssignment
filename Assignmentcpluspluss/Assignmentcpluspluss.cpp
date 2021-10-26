@@ -184,6 +184,18 @@ void DoctorSearchPatient()
 
 }
 
+//FUNCTION OF <NURSE INTERFACE>
+void NurseInterface()
+{
+
+}
+
+//FUNCTION OF <DOCTOR INTERFACE>
+void DoctorInterface()
+{
+
+}
+
 int main()
 {
 	int option = 0;
@@ -195,14 +207,6 @@ int main()
 	cin >> option;
 	if (option == 1)
 	{
-		string Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC;
-		//Optional Elements
-		string Doctor_Name, Sickness_Description;
-		header = current = NULL;
-
-		// A boolean
-		int decision = 1;
-
 		//Login Program
 		string NurseUsername, NursePassword;
 		static int chances = 5;
@@ -226,6 +230,15 @@ int main()
 				break;
 			}
 		}
+
+		string Patient_ID, First_Name, Last_Name, Gender, Disability_Option, age, phone, Patient_IC;
+		//Optional Elements
+		string Doctor_Name, Sickness_Description;
+		header = current = NULL;
+
+		// A boolean
+		int decision = 1;
+
 		//Read Waiting_List Information from User
 		while (decision != 0)
 		{
