@@ -66,7 +66,7 @@ void Add_Patient(string Patient_ID, string First_Name, string Last_Name, string 
 		header = newnode;
 	}
 	::size++;
-
+}
 	
 
 //FUNCTION OF <CHANGE PATIENT ORDER>
@@ -209,7 +209,7 @@ void NurseInterface()
 	switch (option) {
 	case 1:
 		cout << "**********************Adding New Patient Into Waiting List**********************";
-		Add_Patient();
+	//	Add_Patient(); add parameter 
 		break;
 	case 2:
 		cout << "**********************Entering Waiting List To Change Order**********************";
@@ -361,7 +361,7 @@ int main()
 			cin.ignore();
 		}
 		
-		}
+		
 	}
 	else if (option == 2)
 	{
