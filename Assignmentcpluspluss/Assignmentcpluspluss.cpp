@@ -233,13 +233,11 @@ void NurseInterface()
 		break;
 	case 7:
 		cout << "=========================Terminate System, Returning Main Interface=========================";
-		main();
 		break;
 	}
 	while (option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option !=7)
 	{
 		cout << "Wrong Input! Please Enter Again!" << endl;
-		return DoctorInterface();
 	}
 }
 
@@ -275,7 +273,6 @@ void DoctorInterface()
 		break;
 	case 5:
 		cout << "=========================Terminate System, Returning Main Interface=========================";
-		main();
 		break;
 	}
 	while (options != 1 && options != 2 && options != 3 && options != 4 && options != 5)
