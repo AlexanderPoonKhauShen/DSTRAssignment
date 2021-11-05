@@ -1,10 +1,13 @@
-// Assignmentcpluspluss.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// Assignmentcpluspluss.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
 #include <string>
 #include <windows.h>
 using namespace std;
+
+void DoctorModifyMedicine();
+void DoctorModifySickness();
 
 //creating List for <WAITING_LIST>
 struct waiting_list
@@ -25,7 +28,7 @@ struct Visit_History_List
 	string Visit_Date, Visit_Time;
 	//Optional Elements
 	string Doctor_Name, Sickness_Description, Medicine_Information;
-	history_list* nextAddress;
+	Visit_History_List* nextAddress;
 }*head, * newnodes, * currents, * tails;
 
 //global variable for the sequence
@@ -207,9 +210,9 @@ void DoctorSearchAndModify()//sequenctial searching https://www.hellgeeks.com/se
 	switch (option)
 	{
 	case 1:
-		DoctorModifyMedicine;
+		DoctorModifyMedicine();
 	case 2:
-		DoctorModifySickness;
+		DoctorModifySickness();
 	default:
 		break;
 	}
@@ -230,19 +233,22 @@ void DoctorModifySickness() {
 	}
 	else { // situaltion 3 list not empty and item not the first node
 		Visit_History_List* prev = head;
-		current = head->nextAddress;// detect the item to update
-		while (current != NULL) {
-			if (current->Patient_ID == patientID) {
+		currents = head->nextAddress;// detect the item to update
+		while (currents != NULL) {
+			if (currents->Patient_ID == patientID) {
 				cout << "please retype your book detail here" << endl;
-				getline(cin, current->Sickness_Description);
+				getline(cin, currents->Sickness_Description);
 				return;
 			}
-			current = current->nextAddress;
+			currents = currents->nextAddress;
 		}
 		cout << "The system can't find any for updating! " << endl;
 	}
 	cout << "A2";
 }
+
+
+
 
 void DoctorModifyMedicine() {
 	string patientID;
@@ -259,14 +265,14 @@ void DoctorModifyMedicine() {
 	}
 	else { // situaltion 3 list not empty and item not the first node
 		Visit_History_List* prev = head;
-		current = head->nextAddress;// detect the item to update
-		while (current != NULL) {
-			if (current->Patient_ID == patientID) {
+		currents = head->nextAddress;// detect the item to update
+		while (currents != NULL) {
+			if (currents->Patient_ID == patientID) {
 				cout << "please retype your book detail here" << endl;
 				getline(cin, currents->Medicine_Information);
 				return;
 			}
-			current = current->nextAddress;
+			currents = currents->nextAddress;
 		}
 		cout << "The system can't find any for updating! " << endl;
 	}
@@ -287,14 +293,14 @@ void DoctorModifyDoctorName() {
 	}
 	else { // situaltion 3 list not empty and item not the first node
 		Visit_History_List* prev = head;
-		current = head->nextAddress;// detect the item to update
-		while (current != NULL) {
-			if (current->Patient_ID == patientID) {
+		currents = head->nextAddress;// detect the item to update
+		while (currents != NULL) {
+			if (currents->Patient_ID == patientID) {
 				cout << "please enter doctor name here" << endl;
 				getline(cin, currents->Doctor_Name);
 				return;
 			}
-			current = current->nextAddress;
+			currents = currents->nextAddress;
 		}
 		cout << "The system can't find any for updating! " << endl;
 	}
