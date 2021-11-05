@@ -17,7 +17,7 @@ struct waiting_list
 }*header, * newnode, * current;
 
 //creating List for <PATIENT_VISIT_HISTORY_LIST>
-struct history_list
+struct Visit_History_List
 {
 	// Patient Elements
 	string Patient_ID, First_Name, Last_Name, Gender, Disability_Option;
@@ -25,7 +25,8 @@ struct history_list
 	string Visit_Date, Visit_Time;
 	//Optional Elements
 	string Doctor_Name, Sickness_Description, Medicine_Information;
-};
+	history_list* nextAddress;
+}*head, * newnodes, * currents, * tails;
 
 //global variable for the sequence
 int size = 0;
@@ -171,24 +172,160 @@ void getsize()
 //FUNCTION OF <DOCTOR VIEW ORIGINAL WAITING LIST>
 void DoctorViewWaitingList()
 {
+	current = header;
+	while (current != NULL)
+	{
+		cout << "Patient-ID: " << current->Patient_ID << "\n";
+		cout << "First Name: " << current->First_Name << "\n";
+		cout << "Last Name: " << current->Last_Name << "\n";
+		cout << "Gender: " << current->Gender << "\n";
+		cout << "Disability Option: " << current->Disability_Option << "\n";
+		cout << "Doctor Name: " << current->Doctor_Name << "\n";
+		cout << "Sickness Description: " << current->Sickness_Description << "\n";
+		cout << "Patient Age: " << current->age << "\n";
+		cout << "Phone Number: " << current->phone << "\n";
+		cout << "Patient-IC: " << current->Patient_IC << endl << endl;
+		current = current->nextAddress;
+	}
+	cout << "List is endeded" << endl << endl;
+	cout << "A1";
 
+	current = header;
+	while (current!=NULL) {
+
+	}
 }
 
 //FUNCTION OF <DOCTOR SEARCH AND MODIFY PATIENT RECORD>
-void DoctorSearchAndModify()
+void DoctorSearchAndModify()//sequenctial searching https://www.hellgeeks.com/sequential-search/
 {
+	int option;
+	cout << "1. Modify patient medicine" <<endl;
+	cout << "2. Modify sickness description" << endl;
+	cout << "Enter the option you want to modify: ";
+	cin >> option;
+	switch (option)
+	{
+	case 1:
+		DoctorModifyMedicine;
+	case 2:
+		DoctorModifySickness;
+	default:
+		break;
+	}
+}
 
+void DoctorModifySickness() {
+	string patientID;
+	cout << "Enter Patient ID";
+	getline(cin, patientID);
+
+	if (head == NULL) {
+		cout << " the list is empty now! cant search anything here" << endl;
+		return;
+	}
+	else if (head->Patient_ID == patientID) {
+		cout << "Enter the sickeness description:" << endl;
+		getline(cin, head->Sickness_Description);
+	}
+	else { // situaltion 3 list not empty and item not the first node
+		Visit_History_List* prev = head;
+		current = head->nextAddress;// detect the item to update
+		while (current != NULL) {
+			if (current->Patient_ID == patientID) {
+				cout << "please retype your book detail here" << endl;
+				getline(cin, current->Sickness_Description);
+				return;
+			}
+			current = current->nextAddress;
+		}
+		cout << "The system can't find any for updating! " << endl;
+	}
+	cout << "A2";
+}
+
+void DoctorModifyMedicine() {
+	string patientID;
+	cout << "Enter Patient ID";
+	getline(cin, patientID);
+
+	if (head == NULL) {
+		cout << " the list is empty now! cant search anything here" << endl;
+		return;
+	}
+	else if (head->Patient_ID == patientID) {
+		cout << "Enter the sickeness description:" << endl;
+		getline(cin, head->Sickness_Description);
+	}
+	else { // situaltion 3 list not empty and item not the first node
+		Visit_History_List* prev = head;
+		current = head->nextAddress;// detect the item to update
+		while (current != NULL) {
+			if (current->Patient_ID == patientID) {
+				cout << "please retype your book detail here" << endl;
+				getline(cin, currents->Medicine_Information);
+				return;
+			}
+			current = current->nextAddress;
+		}
+		cout << "The system can't find any for updating! " << endl;
+	}
+	cout << "A2";
+}
+void DoctorModifyDoctorName() {
+	string patientID;
+	cout << "Enter Patient ID";
+	getline(cin, patientID);
+
+	if (head == NULL) {
+		cout << " the list is empty now! cant search anything here" << endl;
+		return;
+	}
+	else if (head->Patient_ID == patientID) {
+		cout << "Enter the sickeness description:" << endl;
+		getline(cin, head->Doctor_Name);
+	}
+	else { // situaltion 3 list not empty and item not the first node
+		Visit_History_List* prev = head;
+		current = head->nextAddress;// detect the item to update
+		while (current != NULL) {
+			if (current->Patient_ID == patientID) {
+				cout << "please enter doctor name here" << endl;
+				getline(cin, currents->Doctor_Name);
+				return;
+			}
+			current = current->nextAddress;
+		}
+		cout << "The system can't find any for updating! " << endl;
+	}
+	cout << "A2";
 }
 
 //FUNCTION OF <DOCTOR SORT AND DISPLAY PATIENT VISIT HISTORY>
-void DoctorSortAndDisplay()
+void DoctorSortAndDisplay()//heap sort https://www.geeksforgeeks.org/heap-sort-for-decreasing-order-using-min-heap/
 {
 
-}
+	cout << "A3";
+
+} 
 
 //FUNCTION OF <DOCTOR SEARCH PATIENT VISIT HISTORY>
-void DoctorSearchPatient()
+void DoctorSearchPatient() //sequnctial; search
 {
+	string keyword;
+	cout << "enter patient name";
+	currents = head;
+	int position = 1;
+	cout << "\nbooklist that contain the word of " << keyword << "as below: " << endl;
+	while (currents != NULL) {
+		if (currents->First_Name.find(keyword) != string::npos) {
+			cout << position << "-" << current->First_Name << endl;
+
+		}
+		currents = currents->nextAddress;
+		position++;
+	}
+	cout << "A4";
 
 }
 
@@ -246,46 +383,50 @@ void NurseInterface()
 void DoctorInterface()
 {
 	int options = 0;
-	cout << "=========================Doctor Main Interface=========================";
-	cout << "1. View All Patients On The Original Waiting List.\n";
-	cout << "2. Search Specific Patient From The Patient's Visit History & Modify Patient Record.\n";
-	cout << "3. Sort & Display Records From Patient's Visit History.\n";
-	cout << "4. Search Patients From Patient's Visit History List Based On Sickness Description.\n";
-	cout << "5. Logout System.\n";
-	cout << "Please Enter Your Option: " << endl;
-	cin >> options;
-	switch (options) {
-	case 1:
-		cout << "**********************Entering Original Waiting List For View**********************";
-		DoctorViewWaitingList();
-		break;
-	case 2:
-		cout << "**********************Entering Patient Visit History For Searching & Modification**********************";
-		DoctorSearchAndModify();
-		break;
-	case 3:
-		cout << "**********************Entering Patient Visit History For Sorting & Displaying**********************";
-		DoctorSortAndDisplay();
-		break;
-	case 4:
-		cout << "**********************Entering Patient Visit History - Sickness Description For Searching**********************";
-		DoctorSearchPatient();
-		break;
-	case 5:
-		cout << "=========================Terminate System, Returning Main Interface=========================";
-		break;
-	}
-	while (options != 1 && options != 2 && options != 3 && options != 4 && options != 5)
-	{
-		cout << "Wrong Input! Please Enter Again!" << endl;
-		return DoctorInterface();
-	}
+
+		cout << "=========================Doctor Main Interface=========================" << endl;
+		cout << "1. View All Patients On The Original Waiting List.\n";
+		cout << "2. Search Specific Patient From The Patient's Visit History & Modify Patient Record.\n";
+		cout << "3. Sort & Display Records From Patient's Visit History.\n";
+		cout << "4. Search Patients From Patient's Visit History List Based On Sickness Description.\n";
+		cout << "5. Logout System.\n";
+		cout << "Please Enter Your Option: " << endl;
+		cin >> options;
+
+		switch (options) {
+		case 1:
+			cout << "**********************Entering Original Waiting List For View**********************";
+			DoctorViewWaitingList();
+			break;
+		case 2:
+			cout << "**********************Entering Patient Visit History For Searching & Modification**********************";
+			DoctorSearchAndModify();
+			break;
+		case 3:
+			cout << "**********************Entering Patient Visit History For Sorting & Displaying**********************";
+			DoctorSortAndDisplay();
+			break;
+		case 4:
+			cout << "**********************Entering Patient Visit History - Sickness Description For Searching**********************";
+			DoctorSearchPatient();
+			break;
+		case 5:
+			cout << "=========================Terminate System, Returning Main Interface=========================";
+			break;
+		}
+		if (options != 1 && options != 2 && options != 3 && options != 4 && options != 5)
+		{
+			cout << "Wrong Input! Please Enter Again!" << endl;
+			return DoctorInterface();
+		}
+	
 }
 
 int main()
 {
 	int option = 0;
-	cout << "=========================Welcome To Klinik Sulaiman Patient Queue Management System=========================";
+
+	cout << "=========================Welcome To Klinik Sulaiman Patient Queue Management System========================="<<endl;
 	cout << "1. Nurse Login\n";
 	cout << "2. Doctor Login\n";
 	cout << "3. Terminate System\n";
@@ -362,7 +503,12 @@ int main()
 	}
 	else if (option == 2)
 	{
-
+		string DoctorUsername, DoctorPassword;
+		cout << "Please Enter Doctor Username: " << endl;
+		getline(cin, DoctorUsername);
+		cout << "Please Enter Doctor Password: " << endl;
+		getline(cin,DoctorPassword);
+		DoctorInterface();
 	}
 	else if (option == 3)
 	{
