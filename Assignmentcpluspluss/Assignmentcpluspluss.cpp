@@ -137,7 +137,23 @@ void PageByPageHistoryList()
 //Process of adding newnode into specific location inside WaitingList
 void ChangePatientOrder()
 {
+	string PatientModification;
+	string orderNumber;
 
+	cin.ignore();
+	cout << "Enter Patient ID: ";
+	getline(cin, PatientModification);
+
+	if (header == NULL) {
+		cout << "The waiting list is empty!";
+		return;
+	}
+	else if (header->Patient_ID == PatientModification) {
+		cout << "Enter order number: ";
+		cin.ignore();
+		getline(cin, orderNumber);
+		// TODO
+	}
 }
 
 //Process of delete node from front of WaitingList
@@ -522,7 +538,21 @@ void NurseSearchPatient()
 //Function for Calling Patient to be Treated. - 1.4
 void NurseCallPatient()
 {
+	string PatientModification;
 
+	current = header;
+	cout << "Enter Patient ID: ";
+	getline(cin, PatientModification);
+
+	if (header == NULL) {
+		cout << "List is empty!";
+		return;
+	}
+	// Patient in the first index
+	else if (header->Patient_ID == PatientModification) {
+		DeleteFrontWaitingList();
+		cout << "Patient has been successfully removed from the queue, being called.";
+	}
 }
 
 //Function for View All Patients From Original Waiting List. - 1.3
