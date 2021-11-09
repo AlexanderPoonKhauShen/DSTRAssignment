@@ -79,7 +79,7 @@ void AddPatient(string Patient_ID, string First_Name, string Last_Name, string G
 
 void InsertVisitHistoryList(string Patient_ID, string First_Name, string Last_Name, string Gender,
 	string Disability_Option, string age, string phone, string Patient_IC, string Doctor_Name, string Sickness_Description,
-	string Medicine_Information, string Visit_Date, string Visit_Time)
+	string Medicine_Information, string Visit_Date, string Visit_Time) // insertion sorting 
 {
 	//create a newnode
 	newnodes = new Visit_History_List;
@@ -436,6 +436,7 @@ void DoctorViewPatientList()
 		cout << "Patient IC: " << current->Patient_IC << endl;
 		cout << "Doctor Name: " << current->Doctor_Name << endl;
 		cout << "Patient Sickness Description: " << current->Sickness_Description << endl;
+		cout << "patient medicine" << current->Medicine_Information << endl;
 		cout << "Patient Visit Date: " << current->Visit_Date << endl;
 		cout << "Patient Visit Time: " << current->Visit_Time << endl;
 
@@ -457,29 +458,29 @@ void DoctorSearchPatient()
 	{
 		cout << "Please insert sickness decriptopn for Information: ";
 		cin >> keyword;
-		current = header;  //this one need to change later as well
-		while (current != NULL)
+		currents = head; 
+		while (currents != NULL)
 		{
 			if (currents->Sickness_Description.find(keyword) != string::npos) {
-				cout << "====== Information For Patient-ID " << currents->Patient_ID << " Are As Below ======" << endl;
+				cout << "====== Information For Patient First Name " << currents->First_Name << " Are As Below ======" << endl;
 				cout << "Patient ID: " << currents->Patient_ID << endl;
 				cout << "Patient First Name: " << currents->First_Name << endl;
 				cout << "Patient Last Name: " << currents->Last_Name << endl;
 				cout << "Patient Gender: " << currents->Gender << endl;
 				cout << "Patient Disability Option: " << currents->Disability_Option << endl;
-				cout << "Patient Age: " << currents << endl;
+				cout << "Patient Age: " << currents->age << endl;
 				cout << "Patient Phone Number: " << currents->phone << endl;
 				cout << "Patient IC: " << currents->Patient_IC << endl;
 				cout << "Doctor Name: " << currents->Doctor_Name << endl;
 				cout << "Patient Sickness Description: " << currents->Sickness_Description << endl;
+				cout << "patient medicine" << currents->Medicine_Information << endl;
 				cout << "Patient Visit Date: " << currents->Visit_Date << endl;
 				cout << "Patient Visit Time: " << currents->Visit_Time << endl;
 				cout << "================================================================================" << endl;
 			}
 			currents = currents->nextAddress;
 		}
-		cout << "End of Searching. To Continue Press 1, To Terminate Press 0: ";
-		return DoctorMainInterface();
+		return DoctorMainInterface();	
 	}
 	else if (Option == 2)
 	{
@@ -500,6 +501,7 @@ void DoctorSearchPatient()
 				cout << "Patient IC: " << currents->Patient_IC << endl;
 				cout << "Doctor Name: " << currents->Doctor_Name << endl;
 				cout << "Patient Sickness Description: " << currents->Sickness_Description << endl;
+				cout << "patient medicine" << currents->Medicine_Information << endl;
 				cout << "Patient Visit Date: " << currents->Visit_Date << endl;
 				cout << "Patient Visit Time: " << currents->Visit_Time << endl;
 				cout << "================================================================================" << endl;
@@ -534,11 +536,12 @@ void VisitHistoryPageByPage()
 		cout << "Patient Last Name: " << currents->Last_Name << endl;
 		cout << "Patient Gender: " << currents->Gender << endl;
 		cout << "Patient Disability Option: " << currents->Disability_Option << endl;
-		cout << "Patient Age: " << currents << endl;
+		cout << "Patient Age: " << currents->age << endl;
 		cout << "Patient Phone Number: " << currents->phone << endl;
 		cout << "Patient IC: " << currents->Patient_IC << endl;
 		cout << "Doctor Name: " << currents->Doctor_Name << endl;
 		cout << "Patient Sickness Description: " << currents->Sickness_Description << endl;
+		cout << "patient medicine" << currents->Medicine_Information << endl;
 		cout << "Patient Visit Date: " << currents->Visit_Date << endl;
 		cout << "Patient Visit Time: " << currents->Visit_Time << endl;
 
