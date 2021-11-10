@@ -32,8 +32,8 @@ struct Visit_History_List
 	string Visit_Date, Visit_Time;
 	//Optional Elements
 	string Doctor_Name, Sickness_Description, Medicine_Information;
-	Visit_History_List* nextAddress;
-	Visit_History_List* prevaddress;
+	Visit_History_List* nextAddress = nullptr;
+	Visit_History_List* prevaddress = nullptr;
 }*head, * newnodes, * currents, * tails;
 
 //Process of Add New Patient to End of List
@@ -527,7 +527,7 @@ void VisitHistoryPageByPage()
 
 	currents = head;
 
-	int i = 1; int decision = 1;
+	int i = ::size; int decision = 1;
 	while (decision != 0)
 	{
 		cout << "====== Information For Patient-ID " << currents->Patient_ID << " Are As Below ======" << endl;
@@ -559,8 +559,10 @@ void VisitHistoryPageByPage()
 		}
 		else if (decision == 2 && currents->prevaddress != NULL)
 		{
-			currents = currents->prevaddress;
-			i--;
+				currents = currents->prevaddress;
+				i--;
+			
+
 		}
 		else if (decision == 0)
 		{
