@@ -9,6 +9,7 @@ void LoginInterface();
 void NurseMainInterface();
 void DoctorMainInterface();
 void PatientDetailTemp();
+void DeleteOrderNumber(string patientid);
 
 // Set up the Waiting List
 struct Waiting_List
@@ -19,8 +20,8 @@ struct Waiting_List
 	string Doctor_Name, Sickness_Description;
 	//Set It As Null
 	string Medicine_Information, Visit_Date, Visit_Time;
-	Waiting_List* nextAddress;
-	Waiting_List* prevAddress;
+	Waiting_List* nextAddress = nullptr;
+	Waiting_List* prevAddress = nullptr;
 }*header, * newnode, * current, * tail;
 
 //Set Up the Patient Visit History List
@@ -32,8 +33,8 @@ struct Visit_History_List
 	string Visit_Date, Visit_Time;
 	//Optional Elements
 	string Doctor_Name, Sickness_Description, Medicine_Information;
-	Visit_History_List* nextAddress;
-	Visit_History_List* prevaddress;
+	Visit_History_List* nextAddress = nullptr;
+	Visit_History_List* prevaddress = nullptr;
 }*head, * newnodes, * currents, * tails;
 
 //Process of Add New Patient to End of List
@@ -177,7 +178,8 @@ void ChangePatientOrder()
 {
 	string PatientModification;
 	string inputOrderNumber;
-	int size = 0;
+	int orderNumber;
+	int size = ::size;
 
 	cin.ignore();
 	cout << "Enter Patient ID: ";
@@ -185,32 +187,111 @@ void ChangePatientOrder()
 
 	current = header;
 
+
 	if (header == NULL) {
 		cout << "The waiting list is empty!";
-		return;
+		return NurseMainInterface();
 	}
-	else if (header->Patient_ID == PatientModification) {
-		cout << "Enter order number: ";
-		cin.ignore();
-		getline(cin, inputOrderNumber);
 
-		int orderNumber = std::stoi(inputOrderNumber);
-		if (orderNumber < 1 || orderNumber > size + 1) {
-			cout << "Invalid Position!";
-			return;
-		}
-		else {
-			while (orderNumber--) {
-				if (orderNumber != 0) {
-			//		Waiting_List* current = (*current).nextAddress;
-					cout << "Index has been updated!";
-				}
+	while (current != NULL) {
+		
+		if (current->Patient_ID == PatientModification) {
+			newnode = current;
+			cout << "Enter order number: ";
+			cin >> orderNumber;
+			cin.ignore();
+
+
+			if (orderNumber < 1 || orderNumber > size + 1) {
+				cout << "Invalid Position!";
+				return NurseMainInterface();
 			}
-			size++;
+			else {
+				DeleteOrderNumber(PatientModification);
+				current = header;
+				if (orderNumber == 1) {
+					newnode->nextAddress = header;
+					header->prevAddress = newnode;
+					header = newnode;
+				}
+				else {
+					current = header->nextAddress;
+					int current_position = 2;
+					while (current != NULL && current_position != orderNumber)
+					{
+						current = current->nextAddress;
+						current_position++;
+
+					}
+
+					// current->Previous => heksagon
+					try {
+						current->prevAddress->nextAddress = newnode;
+					}
+					catch (exception) {
+
+					}
+					newnode->prevAddress = current->prevAddress;
+					newnode->nextAddress = current;
+					current->prevAddress = newnode;
+				}
+
+			}
+			::size++;
+			cout << "index has been updated";
+			return NurseMainInterface();
+
 		}
+		current = current->nextAddress;
 	}
+
 }
 
+void DeleteOrderNumber(string patientID) {
+
+
+	current = header;
+	while (current != NULL)
+	{
+		//situation 1: the item is in the first location
+		if (current->Patient_ID == patientID && current == header)
+		{
+			current = header;
+			header = header->nextAddress;
+			if (header != NULL)
+			{
+				header->prevAddress = NULL;
+			}
+			else
+			{
+				tail = NULL;
+			}
+			
+		
+			::size--;
+			return;
+		}
+		//situation 2: the item is in the middle / last location
+		else if (current->Patient_ID == patientID)
+		{
+			//current->previous = previous node
+			current->prevAddress->nextAddress = current->nextAddress;
+			if (current->nextAddress != NULL)
+			{
+				current->nextAddress->prevAddress = current->prevAddress;
+			}
+			else //no next node after delete
+			{
+				tail = NULL;
+			}
+
+			::size--;
+			return;
+		}
+		current = current->nextAddress;
+		
+	}
+}
 
 
 //Process of delete node from front of WaitingList
@@ -527,7 +608,7 @@ void VisitHistoryPageByPage()
 
 	currents = head;
 
-	int i = 1; int decision = 1;
+	int i = ::size; int decision = 1;
 	while (decision != 0)
 	{
 		cout << "====== Information For Patient-ID " << currents->Patient_ID << " Are As Below ======" << endl;
@@ -559,8 +640,10 @@ void VisitHistoryPageByPage()
 		}
 		else if (decision == 2 && currents->prevaddress != NULL)
 		{
-			currents = currents->prevaddress;
-			i--;
+				currents = currents->prevaddress;
+				i--;
+			
+
 		}
 		else if (decision == 0)
 		{
